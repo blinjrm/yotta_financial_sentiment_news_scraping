@@ -19,6 +19,9 @@ def news(
     Scrape a user-specified number of headlines from a newspaper website,
     starting with the most recent ones.
 
+    Using the default parameters, the function will return a dataframe
+    containing the latest headline from reuters.
+
     Parameters
     ----------
     newspaper : str
@@ -54,5 +57,5 @@ def news(
 
 
 if __name__ == "__main__":
-    df = news(early_date="2020-12-26")
+    df = news()
     print(df.head())
