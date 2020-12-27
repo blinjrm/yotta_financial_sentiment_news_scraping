@@ -28,7 +28,7 @@ class WebScraper:
     html_headline: list
     html_date: list
 
-    def get_headlines(self):
+    def get_headlines(self) -> pd.DataFrame:
         """Get headlines and date of news articles.
 
         Returns
@@ -37,7 +37,7 @@ class WebScraper:
             DataFrame containing the headlines and data scraped, with the name of the website.
         """
 
-        print(f"\nGetting headlines from {self.newspaper}:")
+        # print(f"\nGetting headlines from {self.newspaper}:")
 
         headlines = {"headline": [], "date": []}
         date_clean = date.today().strftime("%Y-%m-%d")
@@ -72,7 +72,7 @@ class WebScraper:
                     ).text
                     date_ = article.find(self.html_date[0], class_=self.html_date[1]).text
 
-                    print(f"Current page:{page}, current date: {date_clean}", end="\r")
+                    # print(f"Current page:{page}, current date: {date_clean}", end="\r")
 
                     headline_clean = re.sub(r"[()\#/@;<>{}=~|.?]", " ", headline).strip()
                     date_clean = parse(date_).strftime("%Y-%m-%d")

@@ -2,86 +2,57 @@
 
 Functions
 -------
-after_date
-latest
+news
 
 """
 
-import click
 import pandas as pd
 
 import newscraping.settings.base as stg
 from newscraping.infrastructure.infra import WebScraper
 
 
-@click.command()
-@click.argument("early_date")
-@click.argument("newspaper")
-def after_date(early_date: str, newspaper: str):
-    """Scrape all headlines published after a user-specified date from a newspaper website,
-    starting with the most recent ones.
-
-    \b
-    Parameters
-    ----------
-    early_date : str
-        Start of the period to scrape headlines from. Ex: "2020-12-25"
-    newspaper : str
-        Name of the newspaper to scrape headlines from. Ex: "reuters"
-
-    \b
-    Returns
-    -------
-    DataFrame
-        Headlines with dates and newspaper name
-    """
-    if newspaper in stg.PARAMS_NEWSPAPER.keys():
-        params = stg.PARAMS_NEWSPAPER[newspaper]
-        params["early_date"] = early_date
-        headlines = WebScraper(**params).get_headlines()
-
-        print(headlines.head())
-        return headlines
-
-    else:
-        print(f"The newspaper {newspaper} is not available.")
-
-
-@click.command()
-@click.argument("n_articles", type=int)
-@click.argument("newspaper")
-# @click.option("--newspaper", type=click.Choice(stg.SCRAPING_WEBSITES, case_sensitive=False))
-def latest(n_articles: int, newspaper: str):
+def news(
+    *, newspaper: str = "reuters", n_articles: int = -1, early_date: str = "2020-01-01"
+) -> pd.DataFrame:
     """
     Scrape a user-specified number of headlines from a newspaper website,
     starting with the most recent ones.
 
-    \b
     Parameters
     ----------
-    n_articles : int
-        Number of headlines to scrape. Ex: 5
     newspaper : str
         Name of the newspaper to scrape headlines from. Ex: "reuters"
+    n_articles : int
+        Number of headlines to scrape. Ex: 5
+    early_date : str
+        Start of the period to scrape headlines from. Ex: "2020-12-25"
 
-    \b
     Returns
     -------
     DataFrame
         Headlines with dates and newspaper name
+
+    Raises
+    -------
+    KeyError
+        If the newspaper is not known by the programm
     """
-    if newspaper in stg.PARAMS_NEWSPAPER.keys():
+
+    try:
         params = stg.PARAMS_NEWSPAPER[newspaper]
-        params["n_articles"] = n_articles
-        print(params)
-        headlines = WebScraper(**params).get_headlines()
+    except KeyError:
+        raise KeyError(f"The newspaper {newspaper} is not available.")
 
-        print(headlines.head(min(5, n_articles)))
-        return headlines
+    if n_articles == -1 and early_date == "2020-01-01":
+        n_articles = 1
 
-    else:
-        print(f"The newspaper {newspaper} is not available.")
+    params["n_articles"] = n_articles
+    params["early_date"] = early_date
+
+    return WebScraper(**params).get_headlines()
 
 
 if __name__ == "__main__":
-    pass
+    df = news(early_date="2020-12-26")
+    print(df.head())
