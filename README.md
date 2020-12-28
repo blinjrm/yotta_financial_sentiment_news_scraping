@@ -21,16 +21,16 @@ ___
     │
     ├── Makefile                       <- Commands to launch scripts.
     │
-    └── newscraping                    <- Source code for this package.
-        │
-        ├── application
-        │   └── scraping.py            <- Functions to launch webscraping
-        │
-        ├── infrastructure
-        │   └── infra.py               <- Webscraping utils
-        │
-        └── settings
-            └── base.py                <- Settings for the webscraping utils
+    ├── newscraping                    <- Source code for this package.
+    │   │
+    │   ├── application
+    │   │   └── scraping.py            <- Functions to launch webscraping
+    │   │
+    │   ├── infrastructure
+    │   │   └── infra.py               <- Webscraping utils
+    │   │
+    │   └── settings
+    │       └── base.py                <- Settings for the webscraping utils
 
 ___
 

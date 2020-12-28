@@ -18,7 +18,30 @@ from dateutil.parser import parse
 
 @dataclass
 class WebScraper:
-    """Scrape headlines and publication dates from news websites"""
+    """Scrape headlines and publication dates from news websites
+
+    Attributes
+    ----------
+    newspaper: str
+        Name of the newspaper
+    n_articles: int
+        Number of headlines to scrape. If n_articles = -1, only the date is used to stop the scraping
+    early_date: str
+        Scrape articles published between execution date and early_date (included). Format must be "YYYY-MM-DD"
+    url: str
+        Base URL of the website, defined in settings/base.py
+    html_articles: list
+        HTML tags identifying the articles of a page, defined in settings/base.py
+    html_headline: list
+        HTML tags identifying the headline, defined in settings/base.py
+    html_date: list
+        HTML tags identifying the publication date, defined in settings/base.py
+
+    Methods
+    -------
+    get_headlines
+        Scrape headlines and return the data as a DataFrame
+    """
 
     newspaper: str
     n_articles: int
