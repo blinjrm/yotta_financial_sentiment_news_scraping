@@ -28,8 +28,12 @@ author = "Jerome Blin"
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
+
+# https://github.com/readthedocs/readthedocs.org/issues/7156
 # extensions = ["sphinx.ext.autodoc", "numpydoc"]
-extensions = ["sphinx.ext.autodoc", "sphinx.ext.napoleon"]
+extensions = ["sphinx.ext.autodoc", "sphinx.ext.napoleon", "autoapi.extension"]
+
+autoapi_dirs = ["../mypackage"]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
