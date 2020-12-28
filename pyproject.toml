@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "newscraping"
-version = "0.1.1"
+version = "0.1.2"
 description = "Web scraping of financial headlines"
 authors = ["Jerome Blin"]
 license = "MIT"
