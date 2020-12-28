@@ -55,5 +55,5 @@ You can get the list of available sources this package is configured for calling
 
 ```
 from newscraping import newspapers
-available sources = newspapers()
+available_sources = newspapers()
 ```
