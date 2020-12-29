@@ -1,39 +1,49 @@
-# newscraping
+# Newscraping
 
-Projet N°2 - Deep Learning  
-Sujet : Sentiment analysis of financial news headlines  
+[
+![PyPI](https://img.shields.io/pypi/v/newscraping)
+![PyPI](https://img.shields.io/pypi/l/newscraping)
+](https://pypi.org/project/newscraping/)
 
-Copyright : 2020, Jerome Blin
+This package makes webscraping of financial headlines easy. 
 
+## Suported sources:
 
-___
+- reuters.com/finance/markets
+- ft.com/markets
 
-# Project Organization
+## Installation
 
+Newscraping can be installed from PyPI using `pip` or your package manager of choice:
 
-    ├── README.md                      <- The top-level README for developers using this project.
-    │
-    ├── activate.sh                    <- Configure the environment (PYTHONPATH, dependencies, virtual environment).
-    │
-    ├── docs                           <- Documentation for the project
-    │
-    ├── pyproject.toml                 <- Poetry file with dependencies.
-    │
-    ├── Makefile                       <- Commands to launch scripts.
-    │
-    ├── newscraping                    <- Source code for this package.
-    │   │
-    │   ├── application
-    │   │   └── scraping.py            <- Functions to launch webscraping
-    │   │
-    │   ├── infrastructure
-    │   │   └── infra.py               <- Webscraping utils
-    │   │
-    │   └── settings
-    │       └── base.py                <- Settings for the webscraping utils
+```
+pip install newscraping
+```
 
-___
+## Usage
 
-# Getting Started
+### CLI
 
-TODO: explain how to use. 
+You can use newscraping as a CLI tool using the `newscraping` command.  
+The package will get the latest headline from reuters and print is in the terminal.  
+This is mainly for testing purposes. 
+
+### Python script
+
+You can import the newscraping package in your python project using:
+
+```
+from newscraping import news
+```
+
+And then use it as:
+
+```
+df = news(newspaper="reuters", n_articles=-1, early_date="2020-01-01")
+```
+
+- With the default parameters (see above), only the last headline from reuters will be returned
+- newspaper argument must be in ["reuters", "financial times"]
+- n_articles argument is the number of articles to return, starting with the most recent ones
+- early_date argument is the publication date of the earliest article to return
+- if both n_articles and early_date are provided, the script will stop scraping when the any condition is met
