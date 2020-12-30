@@ -39,11 +39,21 @@ from newscraping import news
 And then use it as:
 
 ```
-df = news(newspaper="reuters", n_articles=-1, early_date="2020-01-01")
+df = news(newspaper="reuters", n_articles=-1, early_date="2020-01-01", verbose=0)
 ```
 
 - With the default parameters (see above), only the last headline from reuters will be returned
 - newspaper argument must be in ["reuters", "financial times"]
 - n_articles argument is the number of articles to return, starting with the most recent ones
 - early_date argument is the publication date of the earliest article to return
-- if both n_articles and early_date are provided, the script will stop scraping when the any condition is met
+- If both n_articles and early_date are provided, the script will stop scraping when the any condition is met
+- Pass verbose=1 to print in the progress of websraping (current page and publication date)
+
+### List of available sources
+
+You can get the list of available sources this package is configured for calling:
+
+```
+from newscraping import newspapers
+available sources = newspapers()
+```

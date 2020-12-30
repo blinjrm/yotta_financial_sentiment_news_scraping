@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "newscraping"
-version = "0.1.1"
+version = "0.1.2"
 description = "Web scraping of financial headlines"
 authors = ["Jerome Blin"]
 license = "MIT"
@@ -25,6 +25,7 @@ coverage = "^5.3.1"
 Sphinx = "^3.4.1"
 numpydoc = "^1.1.0"
 recommonmark = "^0.7.1"
+sphinx-autoapi = "^1.5.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

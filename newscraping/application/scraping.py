@@ -3,6 +3,7 @@
 Functions
 -------
 news
+newspapers
 
 """
 
@@ -13,7 +14,11 @@ from newscraping.infrastructure.infra import WebScraper
 
 
 def news(
-    *, newspaper: str = "reuters", n_articles: int = -1, early_date: str = "2020-01-01"
+    *,
+    newspaper: str = "reuters",
+    n_articles: int = -1,
+    early_date: str = "2020-01-01",
+    verbose: int = 0,
 ) -> pd.DataFrame:
     """
     Scrape a user-specified number of headlines from a newspaper website,
@@ -24,12 +29,15 @@ def news(
 
     Parameters
     ----------
-    newspaper : str
+    newspaper : str, optional
         Name of the newspaper to scrape headlines from. Ex: "reuters"
-    n_articles : int
+    n_articles : int, optional
         Number of headlines to scrape. Ex: 5
-    early_date : str
+    early_date : str, optional
         Start of the period to scrape headlines from. Ex: "2020-12-25"
+    verbose : int, optional
+        Pass verbose=1 to print in the progress of websraping (current page and publication date),
+        by default 0
 
     Returns
     -------
@@ -53,7 +61,11 @@ def news(
     params["n_articles"] = n_articles
     params["early_date"] = early_date
 
-    return WebScraper(**params).get_headlines()
+    return WebScraper(**params).get_headlines(verbose=verbose)
+
+
+def newspapers():
+    return [key for key in stg.PARAMS_NEWSPAPER.keys()]
 
 
 if __name__ == "__main__":
